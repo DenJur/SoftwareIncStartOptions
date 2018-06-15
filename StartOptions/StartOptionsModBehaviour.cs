@@ -4,7 +4,6 @@ namespace StartOptions
 {
     public class StartOptionsModBehaviour : ModBehaviour
     {
-
         public override void OnDeactivate()
         {
             ActorCustomization.StartYears = new[]
@@ -15,14 +14,14 @@ namespace StartOptions
                 2010
             };
 
-            GameData.DifficultySettings = new string[]
+            GameData.DifficultySettings = new[]
             {
                 "Easy",
                 "Medium",
                 "Hard"
             };
 
-            ActorCustomization.MaxPoints = new float[]
+            ActorCustomization.MaxPoints = new[]
             {
                 2.5f,
                 1.5f,
@@ -36,7 +35,7 @@ namespace StartOptions
                 0
             };
 
-            ActorCustomization.StartLoans = new int[]
+            ActorCustomization.StartLoans = new[]
             {
                 0,
                 10000,
@@ -47,30 +46,29 @@ namespace StartOptions
 
         public override void OnActivate()
         {
-            List<int> dates = new List<int>();
-            for (int i = 1970; i <= 2030; i+=5)
-            {
-                dates.Add(i);
-            }
+            var dates = new List<int>();
+            for (var i = 1970; i <= 2030; i += 5) dates.Add(i);
 
             ActorCustomization.StartYears = dates.ToArray();
 
-            GameData.DifficultySettings = new []
+            GameData.DifficultySettings = new[]
             {
                 "Super Easy",
                 "Easy",
                 "Medium",
                 "Hard",
                 "Super Hard",
+                "Sandbox"
             };
 
-            ActorCustomization.MaxPoints = new []
+            ActorCustomization.MaxPoints = new[]
             {
                 4f,
                 2.5f,
                 1.5f,
                 1f,
-                0.05f
+                0.05f,
+                5f
             };
 
             ActorCustomization.DefaultStartMoney = new[]
@@ -79,14 +77,12 @@ namespace StartOptions
                 25000,
                 10000,
                 0,
-                -50000
+                -50000,
+                10000000
             };
 
-            List<int> loans = new List<int>();
-            for (int i = 0; i <= 200; i+=2)
-            {
-                loans.Add((int) (i*LoanWindow.factor));
-            }
+            var loans = new List<int>();
+            for (var i = 0; i <= 200; i += 2) loans.Add((int) (i * LoanWindow.factor));
 
             ActorCustomization.StartLoans = loans.ToArray();
         }
