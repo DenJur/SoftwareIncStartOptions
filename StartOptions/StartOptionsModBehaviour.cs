@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
+using Harmony;
 
 namespace StartOptions
 {
@@ -60,6 +62,9 @@ namespace StartOptions
 
         public override void OnActivate()
         {
+            HarmonyInstance harmony = HarmonyInstance.Create("dnajur.startingoptions");
+            harmony.PatchAll(Assembly.GetExecutingAssembly());
+
             List<int> dates = new List<int>();
             for (int i = 1970; i <= 2030; i += 5) dates.Add(i);
 
@@ -81,17 +86,17 @@ namespace StartOptions
                 0.02f,
                 0.005f,
                 0.001f,
-                0.0002f,
-                0.05f
+                0.0005f,
+                0.1f
             };
 
             SoftwareProduct.DifficultyUserFactor = new[]
             {
-                1.0f,
+                0.7f,
                 0.5f,
                 0.1f,
                 0.05f,
-                0.01f,
+                0.02f,
                 1.0f
             };
 
