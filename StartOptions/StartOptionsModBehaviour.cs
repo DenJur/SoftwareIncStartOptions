@@ -72,62 +72,68 @@ namespace StartOptions
 
             GameData.DifficultySettings = new[]
             {
+
+                "Sandbox",
                 "Super Easy",
                 "Easy",
                 "Medium",
                 "Hard",
-                "Super Hard",
-                "Sandbox"
+                "Super Hard"
             };
 
             SoftwareProduct.DifficultyRepFactor = new[]
             {
+
+                0.1f,
                 0.05f,
                 0.02f,
                 0.005f,
                 0.001f,
-                0.0005f,
-                0.1f
+                0.0005f
             };
 
             SoftwareProduct.DifficultyUserFactor = new[]
             {
+
+                1.0f,
                 0.7f,
                 0.5f,
                 0.1f,
                 0.05f,
-                0.02f,
-                1.0f
+                0.02f
             };
 
             SoftwareAlpha.DifficultySpeed = new[]
             {
+
+                1.5f,
                 1.2f,
                 1.1f,
                 1.05f,
                 1f,
-                0.9f,
-                1.5f
+                0.9f
             };
 
             ActorCustomization.MaxPoints = new[]
             {
+
+                5f,
                 4f,
                 2.5f,
                 1.5f,
                 1f,
-                0.05f,
-                5f
+                0.05f
             };
 
             ActorCustomization.DefaultStartMoney = new[]
             {
+
+                10000000,
                 100000,
                 25000,
                 10000,
                 0,
-                -50000,
-                10000000
+                -50000
             };
 
             List<int> loans = new List<int>();
