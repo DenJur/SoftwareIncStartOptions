@@ -42,12 +42,26 @@ namespace StartOptions
                 40000,
                 90000
             };
+
+            SoftwareProduct.DifficultyRepFactor = new[]
+            {
+                0.02f,
+                0.005f,
+                0.001f
+            };
+
+            SoftwareProduct.DifficultyUserFactor = new[]
+            {
+                0.5f,
+                0.1f,
+                0.05f
+            };
         }
 
         public override void OnActivate()
         {
-            var dates = new List<int>();
-            for (var i = 1970; i <= 2030; i += 5) dates.Add(i);
+            List<int> dates = new List<int>();
+            for (int i = 1970; i <= 2030; i += 5) dates.Add(i);
 
             ActorCustomization.StartYears = dates.ToArray();
 
@@ -59,6 +73,36 @@ namespace StartOptions
                 "Hard",
                 "Super Hard",
                 "Sandbox"
+            };
+
+            SoftwareProduct.DifficultyRepFactor = new[]
+            {
+                0.05f,
+                0.02f,
+                0.005f,
+                0.001f,
+                0.0002f,
+                0.05f
+            };
+
+            SoftwareProduct.DifficultyUserFactor = new[]
+            {
+                1.0f,
+                0.5f,
+                0.1f,
+                0.05f,
+                0.01f,
+                1.0f
+            };
+
+            SoftwareAlpha.DifficultySpeed = new[]
+            {
+                1.2f,
+                1.1f,
+                1.05f,
+                1f,
+                0.9f,
+                1.5f
             };
 
             ActorCustomization.MaxPoints = new[]
@@ -81,8 +125,8 @@ namespace StartOptions
                 10000000
             };
 
-            var loans = new List<int>();
-            for (var i = 0; i <= 200; i += 2) loans.Add((int) (i * LoanWindow.factor));
+            List<int> loans = new List<int>();
+            for (int i = 0; i <= 200; i += 2) loans.Add((int) (i * LoanWindow.factor));
 
             ActorCustomization.StartLoans = loans.ToArray();
         }
