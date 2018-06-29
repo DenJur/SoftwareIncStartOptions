@@ -72,7 +72,6 @@ namespace StartOptions
 
             GameData.DifficultySettings = new[]
             {
-
                 "Sandbox",
                 "Super Easy",
                 "Easy",
@@ -83,7 +82,6 @@ namespace StartOptions
 
             SoftwareProduct.DifficultyRepFactor = new[]
             {
-
                 0.1f,
                 0.05f,
                 0.02f,
@@ -94,7 +92,6 @@ namespace StartOptions
 
             SoftwareProduct.DifficultyUserFactor = new[]
             {
-
                 1.0f,
                 0.7f,
                 0.5f,
@@ -105,7 +102,6 @@ namespace StartOptions
 
             SoftwareAlpha.DifficultySpeed = new[]
             {
-
                 1.5f,
                 1.2f,
                 1.1f,
@@ -116,7 +112,6 @@ namespace StartOptions
 
             ActorCustomization.MaxPoints = new[]
             {
-
                 5f,
                 4f,
                 2.5f,
@@ -127,7 +122,6 @@ namespace StartOptions
 
             ActorCustomization.DefaultStartMoney = new[]
             {
-
                 10000000,
                 100000,
                 25000,
