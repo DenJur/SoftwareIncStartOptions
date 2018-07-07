@@ -58,6 +58,13 @@ namespace StartOptions
                 0.1f,
                 0.05f
             };
+
+            Employee.EducationDrain = new[]
+            {
+                0.002f,
+                0.003f,
+                0.004f
+            };
         }
 
         public override void OnActivate()
@@ -128,6 +135,16 @@ namespace StartOptions
                 10000,
                 0,
                 -50000
+            };
+
+            Employee.EducationDrain = new[]
+            {
+                0.0001f,
+                0.001f,
+                0.002f,
+                0.003f,
+                0.004f,
+                0.005f
             };
 
             List<int> loans = new List<int>();
