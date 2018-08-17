@@ -12,7 +12,7 @@ namespace StartOptions
         public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {
             List<CodeInstruction> codes = new List<CodeInstruction>(instructions);
-            Util.OverwriteDifficultyMapRanges(codes);
+            Util.OverwriteDifficultyMapRanges(codes,48,8);
             return codes.AsEnumerable();
         }
     }

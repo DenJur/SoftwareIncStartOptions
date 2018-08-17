@@ -31,7 +31,7 @@ namespace StartOptions
             return -1;
         }
 
-        public static void OverwriteDifficultyMapRanges(List<CodeInstruction> codes)
+        public static void OverwriteDifficultyMapRanges(List<CodeInstruction> codes, float rangeStart, float rangeEnd)
         {
             int start = 0;
             while (start != -1)
@@ -40,6 +40,8 @@ namespace StartOptions
                 if (pos != -1)
                 {
                     codes[pos + 3].operand = NumDifficulties;
+                    codes[pos + 4].operand = rangeStart;
+                    codes[pos + 5].operand = rangeEnd;
                     pos += 7;
                 }
 
