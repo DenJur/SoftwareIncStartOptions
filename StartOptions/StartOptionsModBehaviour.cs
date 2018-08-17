@@ -1,11 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Harmony;
+using Steamworks;
+using UnityEngine;
+using Version = System.Version;
 
 namespace StartOptions
 {
     public class StartOptionsModBehaviour : ModBehaviour
     {
+        private const string PrefsKey = "STARTINGOPTIONS";
+
         public override void OnDeactivate()
         {
             ActorCustomization.StartYears = new[]
@@ -71,6 +78,30 @@ namespace StartOptions
         {
             HarmonyInstance harmony = HarmonyInstance.Create("dnajur.startingoptions");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
+
+            PublishedFileId_t key = new PublishedFileId_t(1409452834);
+            IWorkshopItem value;
+            bool result = SteamWorkshop.WorkshopItems.TryGetValue(key, out value);
+            if (result)
+            {
+                Version version = Assembly.GetAssembly(typeof(StartOptionsModBehaviour)).GetName().Version;
+                string versionString = "v" + version.Major + "." + version.Minor + "." + version.Build;
+                Match groups = Regex.Match(value.ItemTitle, @"(v\d+\.\d+\.\d+)");
+                string workshopVersionString = groups.Groups.Count > 0 ? groups.Groups[0].Value : "";
+                if (!value.ItemTitle.Contains(versionString) &&
+                    !PlayerPrefs.GetString(PrefsKey).Equals(workshopVersionString))
+                {
+                    DialogWindow dialog = WindowManager.SpawnDialog();
+                    dialog.Show(
+                        "New version "+workshopVersionString+" of StartingOptions mod is available! Please update your version of the mod.",
+                        false, DialogWindow.DialogType.Information, new KeyValuePair<string, Action>("Okay", delegate
+                        {
+                            PlayerPrefs.SetString(PrefsKey, workshopVersionString);
+                            PlayerPrefs.Save();
+                            dialog.Window.Close();
+                        }));
+                }
+            }
 
             List<int> dates = new List<int>();
             for (int i = 1970; i <= 2030; i += 5) dates.Add(i);
