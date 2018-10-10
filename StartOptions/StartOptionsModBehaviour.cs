@@ -1,20 +1,89 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using Harmony;
-using Steamworks;
-using UnityEngine;
-using Version = System.Version;
+﻿using System.Collections.Generic;
 
 namespace StartOptions
 {
     public class StartOptionsModBehaviour : ModBehaviour
     {
-        private const string PrefsKey = "STARTINGOPTIONS";
 
         public override void OnDeactivate()
         {
+            DifficultyValues.DefaultStartMoney = new int[]
+            {
+                50000,
+                10000,
+                0
+            };
+
+            DifficultyValues.FanGainBonus = new float[]
+            {
+                0.25f,
+                0.125f,
+                0f
+            };
+
+            DifficultyValues.DesignDocumentSpeedBonus = new float[]
+            {
+                4f,
+                2.5f,
+                1f
+            };
+
+            DifficultyValues.EducationDrain = new float[]
+            {
+                0.002f,
+                0.003f,
+                0.004f
+            };
+
+            DifficultyValues.EmployeeSkillGainBonus = new float[]
+            {
+                2f,
+                1.5f,
+                1f
+            };
+
+            DifficultyValues.PressReleaseHypeDeadline = new float[]
+            {
+                32f,
+                24f,
+                16f
+            };
+
+            DifficultyValues.UnitSalesBonus = new float[]
+            {
+                2f,
+                1.5f,
+                1f
+            };
+
+            DifficultyValues.AICompanyAverageSavy = new float[]
+            {
+                0.75f,
+                0.875f,
+                1f
+            };
+
+            DifficultyValues.AlphaSpeedBonus = new float[]
+            {
+                1.1f,
+                1.05f,
+                1f
+            };
+
+            DifficultyValues.ProductReputationFactor = new float[]
+            {
+                0.02f,
+                0.005f,
+                0.001f
+            };
+         
+            DifficultyValues.ProductUserbaseFactor = new float[]
+            {
+                0.5f,
+                0.1f,
+                0.05f
+            };
+
             ActorCustomization.StartYears = new[]
             {
                 1980,
@@ -37,13 +106,6 @@ namespace StartOptions
                 1f
             };
 
-            ActorCustomization.DefaultStartMoney = new[]
-            {
-                25000,
-                10000,
-                0
-            };
-
             ActorCustomization.StartLoans = new[]
             {
                 0,
@@ -51,57 +113,119 @@ namespace StartOptions
                 40000,
                 90000
             };
-
-            SoftwareProduct.DifficultyRepFactor = new[]
-            {
-                0.02f,
-                0.005f,
-                0.001f
-            };
-
-            SoftwareProduct.DifficultyUserFactor = new[]
-            {
-                0.5f,
-                0.1f,
-                0.05f
-            };
-
-            Employee.EducationDrain = new[]
-            {
-                0.002f,
-                0.003f,
-                0.004f
-            };
         }
 
         public override void OnActivate()
         {
-            HarmonyInstance harmony = HarmonyInstance.Create("dnajur.startingoptions");
-            harmony.PatchAll(Assembly.GetExecutingAssembly());
-
-            PublishedFileId_t key = new PublishedFileId_t(1409452834);
-            IWorkshopItem value;
-            bool result = SteamWorkshop.WorkshopItems.TryGetValue(key, out value);
-            if (result)
+            DifficultyValues.DefaultStartMoney = new int[]
             {
-                Version version = Assembly.GetAssembly(typeof(StartOptionsModBehaviour)).GetName().Version;
-                string versionString = "v" + version.Major + "." + version.Minor + "." + version.Build;
-                Match groups = Regex.Match(value.ItemTitle, @"(v\d+\.\d+\.\d+)");
-                string workshopVersionString = groups.Groups.Count > 0 ? groups.Groups[0].Value : "";
-                if (!value.ItemTitle.Contains(versionString) &&
-                    !PlayerPrefs.GetString(PrefsKey).Equals(workshopVersionString))
-                {
-                    DialogWindow dialog = WindowManager.SpawnDialog();
-                    dialog.Show(
-                        "New version "+workshopVersionString+" of StartingOptions mod is available! Please update your version of the mod.",
-                        false, DialogWindow.DialogType.Information, new KeyValuePair<string, Action>("Okay", delegate
-                        {
-                            PlayerPrefs.SetString(PrefsKey, workshopVersionString);
-                            PlayerPrefs.Save();
-                            dialog.Window.Close();
-                        }));
-                }
-            }
+                100000000,
+                200000,
+                50000,
+                10000,
+                0,
+                -50000
+            };
+
+            DifficultyValues.FanGainBonus = new float[]
+            {
+                1.0f,
+                0.5f,
+                0.25f,
+                0.125f,
+                0f,
+                0f
+            };
+
+            DifficultyValues.DesignDocumentSpeedBonus = new float[]
+            {
+                10f,
+                8f,
+                4f,
+                2.5f,
+                1f,
+                0.8f
+            };
+
+            DifficultyValues.EducationDrain = new float[]
+            {
+                0.0001f,
+                0.001f,
+                0.002f,
+                0.003f,
+                0.004f,
+                0.005f
+            };
+
+            DifficultyValues.EmployeeSkillGainBonus = new float[]
+            {
+                10f,
+                4f,
+                2f,
+                1.5f,
+                1f,
+                0.8f
+            };
+
+            DifficultyValues.PressReleaseHypeDeadline = new float[]
+            {
+                128f,
+                64f,
+                32f,
+                24f,
+                16f,
+                8f
+            };
+
+            DifficultyValues.UnitSalesBonus = new float[]
+            {
+                10f,
+                4f,
+                2f,
+                1.5f,
+                1f,
+                0.8f
+            };
+
+            DifficultyValues.AICompanyAverageSavy = new float[]
+            {
+                0.3f,
+                0.6f,
+                0.75f,
+                0.875f,
+                1f,
+                1.1f
+            };
+
+            DifficultyValues.AlphaSpeedBonus = new float[]
+            {
+                2f,
+                1.2f,
+                1.1f,
+                1.05f,
+                1f,
+                0.95f
+            };
+
+            DifficultyValues.ProductReputationFactor = new float[]
+            {
+                0.1f,
+                0.05f,
+                0.02f,
+                0.005f,
+                0.001f,
+                0.0005f
+            };
+
+            DifficultyValues.ProductUserbaseFactor = new float[]
+            {
+                10f,
+                1.0f,
+                0.5f,
+                0.1f,
+                0.05f,
+                0.01f
+            };
 
             List<int> dates = new List<int>();
             for (int i = 1970; i <= 2030; i += 5) dates.Add(i);
@@ -115,37 +239,7 @@ namespace StartOptions
                 "Easy",
                 "Medium",
                 "Hard",
-                "Super Hard"
-            };
-
-            SoftwareProduct.DifficultyRepFactor = new[]
-            {
-                0.1f,
-                0.05f,
-                0.02f,
-                0.005f,
-                0.001f,
-                0.0005f
-            };
-
-            SoftwareProduct.DifficultyUserFactor = new[]
-            {
-                1.0f,
-                0.7f,
-                0.5f,
-                0.1f,
-                0.05f,
-                0.02f
-            };
-
-            SoftwareAlpha.DifficultySpeed = new[]
-            {
-                1.5f,
-                1.2f,
-                1.1f,
-                1.05f,
-                1f,
-                0.9f
+                "Impossible"
             };
 
             ActorCustomization.MaxPoints = new[]
@@ -156,26 +250,6 @@ namespace StartOptions
                 1.5f,
                 1f,
                 0.05f
-            };
-
-            ActorCustomization.DefaultStartMoney = new[]
-            {
-                10000000,
-                100000,
-                25000,
-                10000,
-                0,
-                -50000
-            };
-
-            Employee.EducationDrain = new[]
-            {
-                0.0001f,
-                0.001f,
-                0.002f,
-                0.003f,
-                0.004f,
-                0.005f
             };
 
             List<int> loans = new List<int>();

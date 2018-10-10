@@ -5,7 +5,7 @@ namespace StartOptions
 {
     internal class StartOptionsModMeta : ModMeta
     {
-        public void ConstructOptionsScreen(RectTransform parent, ModBehaviour[] behaviours)
+        public override void ConstructOptionsScreen(RectTransform parent, bool inGame)
         {
             Text text = WindowManager.SpawnLabel();
             text.text = "Created by DNA\n\nAllows for wider modification of starting conditions.";
@@ -13,6 +13,6 @@ namespace StartOptions
                 new Rect(0f, 0f, 0f, 0f));
         }
 
-        public string Name => "More Starting Options";
+        public override string Name => "More Starting Options";
     }
 }
