@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace StartOptions
 {
@@ -115,8 +118,28 @@ namespace StartOptions
             };
         }
 
-        public override void OnActivate()
+        private IEnumerator ChangeStartSettings()
         {
+            yield return new WaitForEndOfFrame();
+            var combo = WindowManager.FindElementPath("MainPanel/DiffCombobox").GetComponent<GUICombobox>();
+            combo.Selected = 3;
+        }
+
+        private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name.Equals("Customization") && isActiveAndEnabled)
+            {
+                StartCoroutine(ChangeStartSettings());
+            }
+        }
+
+        void Start()
+        {
+            SceneManager.sceneLoaded += OnLevelFinishedLoading;
+        }
+
+        public override void OnActivate()
+        {  
             DifficultyValues.DefaultStartMoney = new int[]
             {
                 100000000,
